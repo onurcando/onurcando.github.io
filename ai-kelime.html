@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Kelime — AIBul</title>
+<meta name="description" content="Yapay zeka terimleriyle Türkçe kelime oyunu. Her gün yeni bir AI terimi tahmin et!">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --accent: #f59e0b;
+    --text: #f5f5f5;
+    --muted: #737373;
+    --green: #538d4e;
+    --yellow: #b59f3b;
+    --gray: #3a3a3c;
+    --key-bg: #818384;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-size: 1.1rem; font-weight: 700; }
+  .logo span { color: var(--accent); }
+  .back-link { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+  .game-title { font-size: 1.5rem; font-weight: 700; text-align: center; padding: 12px 0 4px; }
+  .game-subtitle { color: var(--muted); font-size: 0.85rem; text-align: center; padding-bottom: 16px; border-bottom: 1px solid var(--border); width: 100%; max-width: 500px; }
+
+  #message-bar {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 8px 0;
+  }
+  .msg-pop {
+    background: var(--text);
+    color: var(--bg);
+    padding: 6px 16px;
+    border-radius: 8px;
+    animation: popIn 0.2s ease;
+  }
+  @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  #board {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 0;
+  }
+  .row {
+    display: flex;
+    gap: 6px;
+  }
+  .tile {
+    width: 62px;
+    height: 62px;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: transform 0.1s;
+    position: relative;
+  }
+  .tile.filled { border-color: #565758; animation: pop 0.1s ease; }
+  .tile.revealed { animation: flip 0.5s ease forwards; }
+  .tile.correct   { --tile-bg: var(--green);  border-color: var(--green); }
+  .tile.present   { --tile-bg: var(--yellow); border-color: var(--yellow); }
+  .tile.absent    { --tile-bg: var(--gray);   border-color: var(--gray); }
+  @keyframes pop  { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+  @keyframes flip {
+    0%   { transform: rotateX(0);    background: transparent; color: var(--text); }
+    49%  { transform: rotateX(90deg); background: transparent; }
+    50%  { transform: rotateX(90deg); background: var(--tile-bg); color: white; }
+    100% { transform: rotateX(0);    background: var(--tile-bg); color: white; }
+  }
+  .tile.shake { animation: shake 0.5s ease; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    10%,50%,90% { transform: translateX(-4px); }
+    30%,70% { transform: translateX(4px); }
+  }
+
+  #keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 8px;
+    max-width: 500px;
+    width: 100%;
+  }
+  .kb-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+  .key {
+    height: 56px;
+    border-radius: 6px;
+    border: none;
+    background: var(--key-bg);
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    min-width: 38px;
+    padding: 0 8px;
+    flex: 1;
+    max-width: 50px;
+    transition: background 0.3s;
+  }
+  .key.wide { max-width: 70px; font-size: 0.75rem; }
+  .key.correct { background: var(--green); }
+  .key.present { background: var(--yellow); }
+  .key.absent  { background: var(--gray); }
+
+  /* Modal */
+  #modal {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  #modal.show { display: flex; }
+  .modal-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 380px;
+    width: 90%;
+    text-align: center;
+  }
+  .modal-emoji { font-size: 3rem; margin-bottom: 16px; }
+  .modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .modal-word {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 4px;
+    margin: 16px 0 8px;
+  }
+  .modal-hint { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; line-height: 1.5; }
+  .modal-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: opacity 0.2s;
+  }
+  .modal-btn:hover { opacity: 0.85; }
+  .modal-link {
+    display: block;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+
+  /* How to play */
+  #howto {
+    width: 100%;
+    max-width: 500px;
+    padding: 0 20px 20px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+    padding-top: 12px;
+    text-align: center;
+  }
+  .legend {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .leg-item { display: flex; align-items: center; gap: 6px; }
+  .leg-box {
+    width: 22px; height: 22px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">AI<span>Bul</span></div>
+  <a href="https://onurcando.github.io/" class="back-link">← Ana Sayfa</a>
+</header>
+<div class="game-title">AI Kelime 🤖</div>
+<div class="game-subtitle">Yapay zeka terimini 6 tahminde bul</div>
+
+<div id="message-bar"></div>
+<div id="board"></div>
+<div id="keyboard"></div>
+
+<div id="howto">
+  <strong>Nasıl Oynanır?</strong> — 5 harfli bir AI terimini 6 tahminde bul.
+  <div class="legend">
+    <div class="leg-item"><div class="leg-box" style="background:var(--green)">A</div> Doğru yer</div>
+    <div class="leg-item"><div class="leg-box" style="background:var(--yellow)">B</div> Yanlış yer</div>
+    <div class="leg-item"><div class="leg-box" style="background:var(--gray)">C</div> Kelimede yok</div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modal">
+  <div class="modal-box">
+    <div class="modal-emoji" id="m-emoji">🎉</div>
+    <div class="modal-title" id="m-title">Tebrikler!</div>
+    <div class="modal-word" id="m-word"></div>
+    <div class="modal-hint" id="m-hint"></div>
+    <button class="modal-btn" id="m-next">Sonraki Kelime →</button>
+    <a href="https://aibul.vercel.app" class="modal-link">AIBul'da AI Araçlarını Keşfet</a>
+  </div>
+</div>
+
+<script>
+const WORDS = [
+  { word: 'MODEL', hint: 'Verilerden öğrenen yapay zeka sistemi (AI model)' },
+  { word: 'VEKTR', hint: 'Matematiksel temsil biçimi; embedding\'lerin temeli' },
+  { word: 'LLMTR', hint: 'Büyük dil modeli kısaltması (3 harf)... ama biz 5 harf dedik. Bir sonrakine geç!' },
+  { word: 'SINIR', hint: 'Yapay sinir ağlarındaki temel işlem birimi bağlantısı' },
+  { word: 'KATMA', hint: 'Sinir ağlarındaki veri işleme seviyesi (layer)' },
+  { word: 'NÖRON', hint: 'İnsan beynindeki hücre; yapay sinir ağlarının ilham kaynağı' },
+  { word: 'ETKEN', hint: 'Ortamda bağımsız karar veren AI sistemi (agent)' },
+  { word: 'ÖNERI', hint: 'AI\'nın kullanıcıya verdiği tavsiye veya teklif sistemi' },
+  { word: 'SÖZCE', hint: 'Dil modellerine verilen metin girdisi (prompt)' },
+  { word: 'GÖRME', hint: 'Bilgisayar vizyonu; AI\'ın görsel algılama yeteneği' },
+  { word: 'ÖLÇEK', hint: 'Model büyüklüğü ve parametre sayısı (scale)' },
+  { word: 'KAYIP', hint: 'Modelin eğitim sırasında minimize ettiği fonksiyon (loss)' },
+  { word: 'DÜĞÜM', hint: 'Sinir ağındaki işlem birimi (node)' },
+  { word: 'BELLEK', hint: '...6 harf! Ama kısa formu: AI sistemin geçmişi sakladığı yapı' },
+  { word: 'TOKEN', hint: 'Dil modellerinin metni işlediği temel birim parçası' },
+  { word: 'ALICI', hint: 'Üretici modellerdeki ayırt edici ağ (discriminator)' },
+  { word: 'AKRAN', hint: 'Benzer AI örnekleri arasındaki karşılaştırma (peer)' },
+  { word: 'HIZLI', hint: 'Optimize edilmiş çıkarım için gereken AI özelliği (fast)' },
+  { word: 'SEZGI', hint: 'İnsan bilişinden AI\'a aktarılmaya çalışılan içgüdüsel anlayış' },
+  { word: 'MASAJ', hint: '...Bu AI terimi değil! İpucu: Modele yazılan metin = "prompt" başka bir deyişle...' },
+  { word: 'ÖNGÖR', hint: 'AI modelinin çıktı üretme süreci (inference/predict)' },
+  { word: 'CÜMLE', hint: 'Dil modellerinin anladığı temel dil birimi' },
+  { word: 'GIZIL', hint: 'Öğrenilmiş ama gözlemlenemeyen özellik uzayı (latent)' },
+  { word: 'AĞIRL', hint: 'Sinir ağındaki eğitilmiş parametre değeri (weight kısalt.)' },
+];
+
+const VALID_WORDS = new Set(WORDS.map(w => w.word));
+// Also accept any 5-letter Turkish uppercase string
+function isValid(word) {
+  return word.length === 5; // Accept any 5-letter word attempt
+}
+
+// Pick today's word based on date
+const day = Math.floor(Date.now() / 86400000) % WORDS.length;
+let { word: TARGET, hint: HINT } = WORDS[day];
+TARGET = TARGET.toUpperCase();
+
+const ROWS = 6, COLS = 5;
+let board = Array.from({length: ROWS}, () => Array(COLS).fill(''));
+let revealed = Array.from({length: ROWS}, () => Array(COLS).fill(''));
+let currentRow = 0, currentCol = 0, gameOver = false;
+let keyStates = {};
+
+const TR_MAP = { 'İ':'I', 'Ğ':'G', 'Ü':'U', 'Ş':'S', 'Ö':'O', 'Ç':'C' };
+function normalize(ch) { return TR_MAP[ch] || ch; }
+
+// Build board
+const boardEl = document.getElementById('board');
+const tileEls = [];
+for (let r = 0; r < ROWS; r++) {
+  const row = document.createElement('div');
+  row.className = 'row';
+  tileEls.push([]);
+  for (let c = 0; c < COLS; c++) {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    row.appendChild(tile);
+    tileEls[r].push(tile);
+  }
+  boardEl.appendChild(row);
+}
+
+// Build keyboard
+const KEYS = [
+  ['E','R','T','Y','U','I','O','P','Ğ','Ü'],
+  ['A','S','D','F','G','H','J','K','L','Ş','İ'],
+  ['ENTER','Z','X','C','V','B','N','M','Ö','Ç','⌫']
+];
+const kbEl = document.getElementById('keyboard');
+const keyEls = {};
+KEYS.forEach(row => {
+  const rowEl = document.createElement('div');
+  rowEl.className = 'kb-row';
+  row.forEach(k => {
+    const btn = document.createElement('button');
+    btn.className = 'key' + (k === 'ENTER' || k === '⌫' ? ' wide' : '');
+    btn.textContent = k;
+    btn.dataset.key = k;
+    btn.addEventListener('click', () => handleKey(k));
+    rowEl.appendChild(btn);
+    keyEls[k] = btn;
+  });
+  kbEl.appendChild(rowEl);
+});
+
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  if (e.key === 'Enter') handleKey('ENTER');
+  else if (e.key === 'Backspace') handleKey('⌫');
+  else {
+    const ch = e.key.toUpperCase();
+    if (/^[A-ZÇĞİÖŞÜ]$/.test(ch)) handleKey(ch);
+  }
+});
+
+function handleKey(k) {
+  if (gameOver) return;
+  if (k === '⌫') {
+    if (currentCol > 0) {
+      currentCol--;
+      board[currentRow][currentCol] = '';
+      tileEls[currentRow][currentCol].textContent = '';
+      tileEls[currentRow][currentCol].className = 'tile';
+    }
+  } else if (k === 'ENTER') {
+    submitGuess();
+  } else {
+    if (currentCol < COLS) {
+      board[currentRow][currentCol] = k;
+      const tile = tileEls[currentRow][currentCol];
+      tile.textContent = k;
+      tile.className = 'tile filled';
+      currentCol++;
+    }
+  }
+}
+
+function submitGuess() {
+  if (currentCol < COLS) {
+    showMessage('5 harf gir!');
+    shakeRow(currentRow);
+    return;
+  }
+  const guess = board[currentRow].join('');
+  evaluate(guess);
+}
+
+function evaluate(guess) {
+  const result = Array(COLS).fill('absent');
+  const targetArr = TARGET.split('');
+  const guessArr = guess.split('');
+  const used = Array(COLS).fill(false);
+
+  // First pass: correct
+  guessArr.forEach((ch, i) => {
+    if (ch === targetArr[i]) { result[i] = 'correct'; used[i] = true; }
+  });
+  // Second pass: present
+  guessArr.forEach((ch, i) => {
+    if (result[i] === 'correct') return;
+    const j = targetArr.findIndex((t, ti) => !used[ti] && t === ch);
+    if (j !== -1) { result[i] = 'present'; used[j] = true; }
+  });
+
+  // Animate tiles
+  result.forEach((res, i) => {
+    setTimeout(() => {
+      const tile = tileEls[currentRow][i];
+      tile.className = `tile ${res} revealed`;
+      // Update key color
+      const k = board[currentRow][i];
+      const priority = { correct: 3, present: 2, absent: 1 };
+      if ((priority[res] || 0) > (priority[keyStates[k]] || 0)) {
+        keyStates[k] = res;
+        if (keyEls[k]) keyEls[k].className = `key ${res}` + (keyEls[k].classList.contains('wide') ? ' wide' : '');
+      }
+    }, i * 350);
+  });
+
+  const won = result.every(r => r === 'correct');
+  const delay = COLS * 350 + 200;
+
+  setTimeout(() => {
+    if (won) {
+      gameOver = true;
+      showModal(true, guess);
+    } else {
+      currentRow++;
+      currentCol = 0;
+      if (currentRow >= ROWS) {
+        gameOver = true;
+        showModal(false, guess);
+      }
+    }
+  }, delay);
+}
+
+function shakeRow(r) {
+  tileEls[r].forEach(tile => {
+    tile.classList.remove('shake');
+    void tile.offsetWidth;
+    tile.classList.add('shake');
+  });
+}
+
+let msgTimer;
+function showMessage(msg, duration = 1800) {
+  const bar = document.getElementById('message-bar');
+  clearTimeout(msgTimer);
+  bar.innerHTML = `<span class="msg-pop">${msg}</span>`;
+  if (duration > 0) {
+    msgTimer = setTimeout(() => bar.innerHTML = '', duration);
+  }
+}
+
+function showModal(won, lastGuess) {
+  const tryNum = currentRow + (won ? 1 : 0);
+  const emoji = won ? (tryNum === 1 ? '🏆' : tryNum <= 3 ? '🎉' : '✅') : '😔';
+  const title = won ? `${tryNum}. tahminde buldun!` : 'Olmadı bu sefer...';
+  document.getElementById('m-emoji').textContent = emoji;
+  document.getElementById('m-title').textContent = title;
+  document.getElementById('m-word').textContent = TARGET;
+  document.getElementById('m-hint').textContent = HINT;
+  document.getElementById('modal').classList.add('show');
+}
+
+document.getElementById('m-next').addEventListener('click', () => {
+  document.getElementById('modal').classList.remove('show');
+  // Reset game with next word
+  const nextIdx = (day + 1) % WORDS.length;
+  const { word, hint } = WORDS[nextIdx];
+  TARGET = word.toUpperCase();
+  HINT = hint;
+  board = Array.from({length: ROWS}, () => Array(COLS).fill(''));
+  currentRow = 0; currentCol = 0; gameOver = false; keyStates = {};
+  tileEls.forEach(row => row.forEach(t => { t.textContent = ''; t.className = 'tile'; }));
+  Object.values(keyEls).forEach(btn => {
+    btn.className = 'key' + (btn.classList.contains('wide') ? ' wide' : '');
+  });
+});
+</script>
+</body>
+</html>
