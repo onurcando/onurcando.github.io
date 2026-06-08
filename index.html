@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onur CAN — Yapay Zeka & Web Geliştirici | Türkiye</title>
+<meta name="description" content="Onur CAN: Web geliştirici, yapay zeka uzmanı. Türkiye için pratik AI çözümleri, dijital ürünler ve freelance yazılım hizmetleri.">
+<meta name="keywords" content="Onur CAN, yapay zeka, web geliştirici, freelance, AI, KPSS, dijital ürün, Türkiye">
+<meta name="author" content="Onur CAN">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://onurcando.github.io/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://onurcando.github.io/">
+<meta property="og:title" content="Onur CAN — Yapay Zeka & Web Geliştirici">
+<meta property="og:description" content="3 web projesi, 6 dijital ürün, 0 TL maliyet. Türkiye için AI destekli çözümler.">
+<meta property="og:locale" content="tr_TR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Onur CAN — Yapay Zeka & Web Geliştirici">
+<meta name="twitter:description" content="3 web projesi, 6 dijital ürün, 0 TL maliyet. Türkiye için AI destekli çözümler.">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Onur CAN",
+  "url": "https://onurcando.github.io",
+  "sameAs": ["https://github.com/onurcando"],
+  "jobTitle": "Web Geliştirici & Yapay Zeka Uzmanı",
+  "description": "Türkiye için pratik AI çözümleri geliştiren yazılımcı",
+  "knowsAbout": ["Yapay Zeka", "Web Geliştirme", "React", "Next.js", "Node.js"],
+  "offers": {
+    "@type": "Offer",
+    "description": "Freelance web geliştirme ve AI entegrasyon hizmetleri"
+  }
+}
+</script>
+
+<style>
+/* ── Reset & Variables ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:       #060610;
+  --bg2:      #0d0d1f;
+  --card:     #12122a;
+  --border:   #1e1e3f;
+  --accent:   #6366f1;
+  --accent2:  #a855f7;
+  --accent3:  #06b6d4;
+  --gold:     #f59e0b;
+  --green:    #10b981;
+  --red:      #ef4444;
+  --text:     #f0f0ff;
+  --muted:    #8888aa;
+  --max:      1100px;
+  --radius:   16px;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 24px;
+  background: rgba(6,6,16,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-logo {
+  font-size: 1.15rem; font-weight: 800; letter-spacing: -0.5px;
+}
+.nav-logo .accent { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  font-size: 0.88rem; font-weight: 500; color: var(--muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--accent);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; color: white; }
+.nav-menu { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-menu span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; }
+
+/* ── Hero ── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 100px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 24px;
+  padding: 6px 16px;
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 28px;
+  letter-spacing: 0.3px;
+}
+.hero-badge .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+h1 {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+h1 .gradient {
+  background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--muted);
+  margin-bottom: 20px;
+  max-width: 560px;
+}
+.hero-hook {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--text);
+  max-width: 620px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+.hero-hook strong { color: var(--accent); }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white; border: none;
+  padding: 15px 36px; border-radius: 12px;
+  font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99,102,241,0.4); color: white; }
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--border);
+  padding: 15px 36px; border-radius: 12px;
+  font-size: 1rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 60px;
+  flex-wrap: wrap; justify-content: center;
+}
+.stat-item { text-align: center; }
+.stat-item .num {
+  font-size: 2.4rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-item .lbl { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+
+/* ── Section base ── */
+section { padding: 100px 24px; }
+.container { max-width: var(--max); margin: 0 auto; }
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--accent); margin-bottom: 14px;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800; letter-spacing: -1px;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+.section-sub {
+  color: var(--muted); font-size: 1.05rem;
+  max-width: 560px; line-height: 1.7;
+  margin-bottom: 56px;
+}
+
+/* ── Problem Bar ── */
+#problem {
+  background: var(--bg2);
+  padding: 60px 24px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.problem-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.problem-item::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+.problem-emoji { font-size: 2rem; margin-bottom: 12px; }
+.problem-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.problem-text { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+/* ── About ── */
+#hakkimda { background: var(--bg); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+.about-text p strong { color: var(--text); }
+.about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.tag {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.82rem; font-weight: 500; color: var(--muted);
+}
+.about-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+}
+.about-card-title { font-size: 1rem; font-weight: 700; color: var(--muted); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; }
+.timeline { display: flex; flex-direction: column; gap: 20px; }
+.tl-item { display: flex; gap: 16px; }
+.tl-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0; margin-top: 6px;
+}
+.tl-year { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-bottom: 2px; }
+.tl-text { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+
+/* ── Projects ── */
+#projeler { background: var(--bg2); }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.project-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(99,102,241,0.05), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.project-card:hover { border-color: rgba(99,102,241,0.4); transform: translateY(-4px); }
+.project-card:hover::after { opacity: 1; }
+.project-icon {
+  font-size: 2.4rem; margin-bottom: 20px;
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  border-radius: 14px; border: 1px solid var(--border);
+}
+.project-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+.project-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 20px; flex: 1; }
+.project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.p-tag {
+  background: rgba(99,102,241,0.12);
+  color: var(--accent);
+  border-radius: 6px; padding: 4px 10px;
+  font-size: 0.76rem; font-weight: 600;
+}
+.project-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); font-weight: 600; font-size: 0.9rem;
+  transition: gap 0.2s;
+}
+.project-link:hover { gap: 10px; }
+
+/* ── Services ── */
+#hizmetler { background: var(--bg); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.service-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: all 0.25s;
+}
+.service-card:hover { border-color: rgba(99,102,241,0.4); }
+.service-icon { font-size: 2rem; margin-bottom: 14px; }
+.service-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+.service-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 16px; }
+.service-price {
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--green);
+  background: rgba(16,185,129,0.1);
+  border-radius: 6px; padding: 4px 10px;
+  display: inline-block;
+}
+
+/* ── Products ── */
+#urunler { background: var(--bg2); }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: all 0.25s;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.product-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.product-card.purple::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.product-card.green::before  { background: linear-gradient(90deg, var(--green), var(--accent3)); }
+.product-card.gold::before   { background: linear-gradient(90deg, var(--gold), var(--red)); }
+.product-card.blue::before   { background: linear-gradient(90deg, var(--accent3), var(--accent)); }
+.product-card.red::before    { background: linear-gradient(90deg, var(--red), var(--gold)); }
+.product-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,0.3); }
+.product-emoji { font-size: 2rem; margin-bottom: 14px; }
+.product-name { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+.product-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.6; flex: 1; margin-bottom: 20px; }
+.product-footer { display: flex; align-items: center; justify-content: space-between; }
+.product-price { font-size: 1.2rem; font-weight: 800; color: var(--text); }
+.product-btn {
+  background: var(--accent);
+  color: white; border: none;
+  padding: 8px 20px; border-radius: 8px;
+  font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: opacity 0.2s;
+  display: inline-block;
+}
+.product-btn:hover { opacity: 0.85; color: white; }
+
+/* ── Games ── */
+#oyunlar { background: var(--bg); }
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.game-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  text-align: center;
+  transition: all 0.25s;
+  position: relative; overflow: hidden;
+}
+.game-card:hover { transform: translateY(-4px); border-color: rgba(99,102,241,0.4); }
+.game-emoji { font-size: 3.5rem; margin-bottom: 20px; }
+.game-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+.game-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 28px; }
+.game-meta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+.game-meta span {
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem; color: var(--accent); font-weight: 500;
+}
+.btn-game {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white; border: none;
+  padding: 14px 36px; border-radius: 10px;
+  font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+  width: 100%; justify-content: center;
+}
+.btn-game:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(99,102,241,0.35); color: white; }
+
+/* ── Blog ── */
+#blog { background: var(--bg2); }
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.blog-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: all 0.25s;
+  display: flex; flex-direction: column;
+}
+.blog-card:hover { border-color: rgba(99,102,241,0.3); transform: translateY(-2px); }
+.blog-cat {
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--accent); margin-bottom: 12px;
+}
+.blog-title { font-size: 1.05rem; font-weight: 700; line-height: 1.5; margin-bottom: 10px; }
+.blog-excerpt { color: var(--muted); font-size: 0.88rem; line-height: 1.7; flex: 1; margin-bottom: 20px; }
+.blog-link {
+  color: var(--accent); font-weight: 600; font-size: 0.88rem;
+  display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s;
+}
+.blog-link:hover { gap: 10px; }
+
+/* ── Contact ── */
+#iletisim {
+  background: var(--bg);
+  text-align: center;
+}
+.contact-box {
+  max-width: 640px; margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 60px 48px;
+  position: relative; overflow: hidden;
+}
+.contact-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+}
+.contact-title { font-size: 2rem; font-weight: 800; margin-bottom: 14px; }
+.contact-sub { color: var(--muted); margin-bottom: 40px; line-height: 1.7; }
+.contact-links { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+.contact-link {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 20px;
+  transition: all 0.2s; text-align: left;
+}
+.contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+.contact-icon { font-size: 1.4rem; flex-shrink: 0; }
+.contact-info .label { font-size: 0.78rem; color: var(--muted); margin-bottom: 2px; }
+.contact-info .value { font-weight: 600; font-size: 0.95rem; }
+.contact-note {
+  font-size: 0.85rem; color: var(--muted);
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 10px; padding: 14px 20px;
+  line-height: 1.6;
+}
+
+/* ── Footer ── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 40px 24px;
+  text-align: center;
+}
+.footer-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+.footer-logo { font-weight: 800; font-size: 1rem; }
+.footer-logo .accent { color: var(--accent); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: var(--muted); font-size: 0.85rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { color: var(--muted); font-size: 0.82rem; }
+
+/* ── Animations ── */
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-menu { display: block; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-stats { gap: 28px; }
+  .contact-box { padding: 40px 24px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+
+/* ── Mobile Nav Overlay ── */
+#mobile-nav {
+  display: none;
+  position: fixed; inset: 0; z-index: 99;
+  background: var(--bg);
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 32px;
+}
+#mobile-nav.open { display: flex; }
+#mobile-nav a {
+  font-size: 1.4rem; font-weight: 700; color: var(--text);
+  transition: color 0.2s;
+}
+#mobile-nav a:hover { color: var(--accent); }
+#mobile-close {
+  position: absolute; top: 24px; right: 24px;
+  background: none; border: none; color: var(--text);
+  font-size: 1.8rem; cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Nav -->
+<div id="mobile-nav">
+  <button id="mobile-close">✕</button>
+  <a href="#hakkimda" onclick="closeMobileNav()">Hakkımda</a>
+  <a href="#projeler" onclick="closeMobileNav()">Projeler</a>
+  <a href="#hizmetler" onclick="closeMobileNav()">Hizmetler</a>
+  <a href="#urunler" onclick="closeMobileNav()">Ürünler</a>
+  <a href="#oyunlar" onclick="closeMobileNav()">Oyunlar</a>
+  <a href="#blog" onclick="closeMobileNav()">Blog</a>
+  <a href="#iletisim" onclick="closeMobileNav()">İletişim</a>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-logo">Onur<span class="accent">CAN</span></div>
+  <div class="nav-links">
+    <a href="#hakkimda">Hakkımda</a>
+    <a href="#projeler">Projeler</a>
+    <a href="#hizmetler">Hizmetler</a>
+    <a href="#urunler">Ürünler</a>
+    <a href="#oyunlar">Oyunlar</a>
+    <a href="#blog">Blog</a>
+    <a href="#iletisim">İletişim</a>
+  </div>
+  <a href="#iletisim" class="nav-cta">Birlikte Çalışalım</a>
+  <button class="nav-menu" id="nav-menu-btn" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><span class="dot"></span> Türkiye için AI Çözümleri</div>
+  <h1>Onur <span class="gradient">CAN</span></h1>
+  <p class="hero-sub">Web Geliştirici · Yapay Zeka Uzmanı · Dijital Ürün Üreticisi</p>
+  <p class="hero-hook">
+    Çoğu yazılımcı "AI geliyor" diyor. Ben <strong>zaten kullanıyorum</strong> —<br>
+    3 canlı web projesi, 6 dijital ürün, hepsi <strong>sıfır maliyet</strong> ile hayata geçirildi.
+  </p>
+  <div class="hero-actions">
+    <a href="#projeler" class="btn-primary">Projelerimi Gör →</a>
+    <a href="#iletisim" class="btn-secondary">💬 Birlikte Çalışalım</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="num">3</div><div class="lbl">Canlı Web Projesi</div></div>
+    <div class="stat-item"><div class="num">6</div><div class="lbl">Dijital Ürün</div></div>
+    <div class="stat-item"><div class="num">0₺</div><div class="lbl">Başlangıç Maliyeti</div></div>
+    <div class="stat-item"><div class="num">2</div><div class="lbl">Tarayıcı Oyunu</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PROBLEM ═══════════════════════════════ -->
+<div id="problem">
+  <div class="problem-grid">
+    <div class="problem-item fade-in">
+      <div class="problem-emoji">😤</div>
+      <div class="problem-title">Web sitesi yaptırmak çok pahalı</div>
+      <div class="problem-text">Ajanslar 10.000₺ istiyor, freelancer bulunmuyor. Ben uygun fiyata, hızlı teslim yapıyorum.</div>
+    </div>
+    <div class="problem-item fade-in">
+      <div class="problem-emoji">🤯</div>
+      <div class="problem-title">AI'dan nasıl yararlanacağını bilmiyorsun</div>
+      <div class="problem-text">ChatGPT var ama ne sormak gerek? Türkçe içeriklerim ve ürünlerim tam bu soruyu çözüyor.</div>
+    </div>
+    <div class="problem-item fade-in">
+      <div class="problem-emoji">📉</div>
+      <div class="problem-title">Enflasyon paramı eritiyor</div>
+      <div class="problem-text">Maaş yetmiyor, tasarruf imkansız gibi görünüyor. Ücretsiz araçlarımla finansını kontrol altına al.</div>
+    </div>
+    <div class="problem-item fade-in">
+      <div class="problem-emoji">🎯</div>
+      <div class="problem-title">KPSS'de sistem yok, kafan karışık</div>
+      <div class="problem-text">Ne zaman ne çalışılır? AI destekli sınav platformum ve ürünlerim tam planı sunuyor.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ HAKKIMDA ═══════════════════════════════ -->
+<section id="hakkimda">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <div class="section-tag">Hakkımda</div>
+        <h2 class="section-title">Türkiye için<br>pratik AI çözümleri</h2>
+        <p>Yazılım geliştirici olarak şunu fark ettim: <strong>harika teknolojiler var</strong> ama Türkiye'deki kullanıcılara ulaşmıyor. Dil bariyeri, fiyat bariyeri, karmaşıklık bariyeri.</p>
+        <p>Bu yüzden sıfır maliyetle, Türkçe olarak, gerçek problemleri çözen projeler geliştiriyorum. KPSS hazırlığından kişisel finansa, AI araçlarından freelance rehberlerine kadar.</p>
+        <p><strong>Misyonum basit:</strong> AI'ın faydalarını Türkiye'nin her köşesine taşımak.</p>
+        <div class="about-tags">
+          <span class="tag">React</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Python</span>
+          <span class="tag">ChatGPT API</span>
+          <span class="tag">Claude API</span>
+          <span class="tag">Vercel</span>
+          <span class="tag">GitHub</span>
+        </div>
+      </div>
+      <div class="about-card fade-in">
+        <div class="about-card-title">Yolculuk</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div>
+              <div class="tl-year">2024 — Şimdi</div>
+              <div class="tl-text">SınavAI, AIBul, EnflasyonKalkan — 3 canlı proje, 6 dijital ürün, 2 browser oyunu.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div>
+              <div class="tl-year">2023</div>
+              <div class="tl-text">AI araçlarını Türkçe iş akışlarına entegre etmeye başladım. İlk freelance projeleri.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div>
+              <div class="tl-year">2022</div>
+              <div class="tl-text">React ve modern web ekosistemiyle ciddi çalışmalar. Full-stack geliştirmeye geçiş.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div>
+              <div class="tl-year">2020</div>
+              <div class="tl-text">Yazılım yolculuğunun başlangıcı. HTML/CSS/JS temellerden backend'e uzanan öğrenme süreci.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PROJELER ═══════════════════════════════ -->
+<section id="projeler">
+  <div class="container">
+    <div class="section-tag">Projeler</div>
+    <h2 class="section-title">Canlı projeler,<br>gerçek kullanıcılar</h2>
+    <p class="section-sub">Her proje Türkiye'deki gerçek bir problemi çözüyor. Tamamen ücretsiz araçlarla geliştirildi, Vercel üzerinde yayında.</p>
+    <div class="projects-grid">
+      <div class="project-card fade-in">
+        <div class="project-icon">🎓</div>
+        <div class="project-name">SınavAI</div>
+        <div class="project-desc">KPSS ve üniversite sınavlarına hazırlananlar için AI destekli platform. ÖSYM formatında sorular, kişisel çalışma planı, AI açıklamalar. Her yıl 2,5 milyon KPSS adayı için tasarlandı.</div>
+        <div class="project-tags">
+          <span class="p-tag">AI</span>
+          <span class="p-tag">Eğitim</span>
+          <span class="p-tag">Türkçe</span>
+          <span class="p-tag">Ücretsiz</span>
+        </div>
+        <a href="https://sinavai.vercel.app" target="_blank" class="project-link">Siteye Git →</a>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-icon">🤖</div>
+        <div class="project-name">AIBul</div>
+        <div class="project-desc">Türkiye için en faydalı AI araçlarının küratörlü listesi. Türkçe destekli, ücretsiz araçlara odaklanır. "Hangi AI'ı kullanayım?" sorusuna net cevap verir.</div>
+        <div class="project-tags">
+          <span class="p-tag">Yapay Zeka</span>
+          <span class="p-tag">Küratör</span>
+          <span class="p-tag">Ücretsiz</span>
+        </div>
+        <a href="https://aibul.vercel.app" target="_blank" class="project-link">Siteye Git →</a>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-icon">💰</div>
+        <div class="project-name">EnflasyonKalkan</div>
+        <div class="project-desc">%60+ enflasyon döneminde kişisel finansını korumak için pratik araçlar. Sepet fiyat takibi, enflasyon hesaplama, yatırım rehberi. Türkiye ekonomisi için tasarlandı.</div>
+        <div class="project-tags">
+          <span class="p-tag">Finans</span>
+          <span class="p-tag">Enflasyon</span>
+          <span class="p-tag">Türkiye</span>
+        </div>
+        <a href="https://enflasyonkalkan.vercel.app" target="_blank" class="project-link">Siteye Git →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ HİZMETLER ═══════════════════════════════ -->
+<section id="hizmetler">
+  <div class="container">
+    <div class="section-tag">Freelance Hizmetler</div>
+    <h2 class="section-title">Ne yapabilirim<br>senin için?</h2>
+    <p class="section-sub">Ajans fiyatı yok, ajans kalitesi var. Projenizi hızlı, uygun fiyata ve AI destekli teslim ediyorum.</p>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">🌐</div>
+        <div class="service-name">Web Sitesi Geliştirme</div>
+        <div class="service-desc">React, Next.js veya sade HTML/CSS ile hızlı, modern, mobil uyumlu web siteleri. Landing page, portföy, kurumsal site.</div>
+        <span class="service-price">3.000₺'den başlıyor</span>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🤖</div>
+        <div class="service-name">AI Entegrasyonu</div>
+        <div class="service-desc">Mevcut iş süreçlerinize ChatGPT veya Claude entegrasyonu. Chatbot, içerik üretimi, veri analizi, otomasyon.</div>
+        <span class="service-price">5.000₺'den başlıyor</span>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🚀</div>
+        <div class="service-name">Vercel / Deployment</div>
+        <div class="service-desc">Projenizi Vercel, GitHub Pages veya diğer platformlara deploy etme. CI/CD kurulumu, domain bağlantısı, performans optimizasyonu.</div>
+        <span class="service-price">1.500₺'den başlıyor</span>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">📊</div>
+        <div class="service-name">SEO Danışmanlığı</div>
+        <div class="service-desc">Teknik SEO analizi, meta optimizasyonu, içerik stratejisi. Google'da görünür olun. Türkçe SEO'da özelleşmiş yaklaşım.</div>
+        <span class="service-price">2.500₺/ay'dan başlıyor</span>
+      </div>
+    </div>
+    <div style="margin-top:40px; text-align:center;">
+      <a href="#iletisim" class="btn-primary" style="display:inline-flex;">Teklif Al →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ ÜRÜNLER ═══════════════════════════════ -->
+<section id="urunler">
+  <div class="container">
+    <div class="section-tag">Dijital Ürünler</div>
+    <h2 class="section-title">Gerçek problemlere<br>anında çözümler</h2>
+    <p class="section-sub">Hepsi PDF formatında, anında indirilebilir. Shopier üzerinden güvenli ödeme.</p>
+    <div class="products-grid">
+      <div class="product-card purple fade-in">
+        <div class="product-emoji">📚</div>
+        <div class="product-name">KPSS Master Çalışma Sistemi</div>
+        <div class="product-desc">90 günlük plan, konu takip çizelgesi, ChatGPT ile KPSS çalışma promptları. 2,5 milyon aday için.</div>
+        <div class="product-footer">
+          <span class="product-price">149₺</span>
+          <a href="https://shopier.com/47856396" target="_blank" class="product-btn">Satın Al</a>
+        </div>
+      </div>
+      <div class="product-card green fade-in">
+        <div class="product-emoji">💰</div>
+        <div class="product-name">Enflasyon Kalkanı Şablonu</div>
+        <div class="product-desc">Aylık gelir-gider takibi, enflasyon hesaplama aracı, yatırım başlangıç rehberi.</div>
+        <div class="product-footer">
+          <span class="product-price">99₺</span>
+          <a href="https://shopier.com/47856458" target="_blank" class="product-btn">Satın Al</a>
+        </div>
+      </div>
+      <div class="product-card gold fade-in">
+        <div class="product-emoji">📱</div>
+        <div class="product-name">Instagram & TikTok İçerik Makinesi</div>
+        <div class="product-desc">60 Türkçe AI prompt, içerik takvimi, viral hook üreticisi. Bir daha "ne paylaşayım" deme.</div>
+        <div class="product-footer">
+          <span class="product-price">149₺</span>
+          <a href="https://shopier.com/47856504" target="_blank" class="product-btn">Satın Al</a>
+        </div>
+      </div>
+      <div class="product-card red fade-in">
+        <div class="product-emoji">🛍️</div>
+        <div class="product-name">Trendyol & Hepsiburada Satıcı Rehberi</div>
+        <div class="product-desc">Sıfırdan ilk satışa. Ürün seçimi, listeleme, fiyatlandırma, müşteri yorum stratejisi.</div>
+        <div class="product-footer">
+          <span class="product-price">249₺</span>
+          <a href="https://shopier.com/47856540" target="_blank" class="product-btn">Satın Al</a>
+        </div>
+      </div>
+      <div class="product-card blue fade-in">
+        <div class="product-emoji">📄</div>
+        <div class="product-name">CV + LinkedIn Optimizasyon Paketi</div>
+        <div class="product-desc">Türkiye iş pazarına özel CV formatı, LinkedIn algoritması rehberi, doldurmaya hazır şablonlar.</div>
+        <div class="product-footer">
+          <span class="product-price">129₺</span>
+          <a href="https://shopier.com/47856782" target="_blank" class="product-btn">Satın Al</a>
+        </div>
+      </div>
+      <div class="product-card purple fade-in">
+        <div class="product-emoji">🎯</div>
+        <div class="product-name">Türk Freelancer'ın Hayatta Kalma Kiti</div>
+        <div class="product-desc">Müşteri bul, fiyatlandır, sözleşme yap, tahsil et. Hukuki sözleşme şablonu dahil.</div>
+        <div class="product-footer">
+          <span class="product-price">179₺</span>
+          <a href="https://shopier.com/47856896" target="_blank" class="product-btn">Satın Al</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ OYUNLAR ═══════════════════════════════ -->
+<section id="oyunlar">
+  <div class="container">
+    <div class="section-tag">Tarayıcı Oyunları</div>
+    <h2 class="section-title">Öğren,<br>eğlen</h2>
+    <p class="section-sub">Kurulum yok, indirme yok. Tarayıcında direkt oyna.</p>
+    <div class="games-grid">
+      <div class="game-card fade-in">
+        <div class="game-emoji">⏱️</div>
+        <div class="game-name">KPSS Hızlı Quiz</div>
+        <div class="game-desc">Her soruyu 30 saniyede cevapla. ÖSYM formatında GY + GK soruları, anlık açıklamalar ve puan takibi.</div>
+        <div class="game-meta">
+          <span>10 Soru</span>
+          <span>30s / Soru</span>
+          <span>GY + GK</span>
+        </div>
+        <a href="https://sinavai.vercel.app/kpss-quiz.html" target="_blank" class="btn-game">Oyna →</a>
+      </div>
+      <div class="game-card fade-in">
+        <div class="game-emoji">🤖</div>
+        <div class="game-name">AI Kelime</div>
+        <div class="game-desc">Wordle ama yapay zeka terimleriyle! 5 harfli AI terimini 6 tahminde bul. Her kelimeyi çözerken de öğren.</div>
+        <div class="game-meta">
+          <span>6 Hak</span>
+          <span>Türkçe AI</span>
+          <span>Günlük</span>
+        </div>
+        <a href="https://aibul.vercel.app/ai-kelime.html" target="_blank" class="btn-game">Oyna →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ BLOG ═══════════════════════════════ -->
+<section id="blog">
+  <div class="container">
+    <div class="section-tag">Blog</div>
+    <h2 class="section-title">Öğrendiklerimi<br>paylaşıyorum</h2>
+    <p class="section-sub">AI, yazılım ve Türkiye'deki dijital dönüşüm üzerine pratik yazılar.</p>
+    <div class="blog-grid">
+      <div class="blog-card fade-in">
+        <div class="blog-cat">Yapay Zeka · Web</div>
+        <div class="blog-title">Yapay Zeka ile 3 Web Sitesi Nasıl Kurdum? (Sıfır Maliyet)</div>
+        <div class="blog-excerpt">SınavAI, AIBul, EnflasyonKalkan — üç farklı problem, üç canlı site. Stack, araçlar, öğrendiklerim.</div>
+        <a href="https://onurcan5.wordpress.com" target="_blank" class="blog-link">Devamını Oku →</a>
+      </div>
+      <div class="blog-card fade-in">
+        <div class="blog-cat">KPSS · Eğitim</div>
+        <div class="blog-title">KPSS Hazırlığında ChatGPT ve Claude Nasıl Kullanılır?</div>
+        <div class="blog-excerpt">Doğru promptlar, dikkat edilecek sınırlamalar ve SınavAI ile pratik yapma yöntemleri.</div>
+        <a href="https://onurcan5.wordpress.com" target="_blank" class="blog-link">Devamını Oku →</a>
+      </div>
+      <div class="blog-card fade-in">
+        <div class="blog-cat">Kariyer · Freelance</div>
+        <div class="blog-title">Türkiye'de Freelance Yazılımcı Olmak: Gerçekler ve İpuçları</div>
+        <div class="blog-excerpt">3 yılın özeti: müşteri bulmak, fiyatlandırmak, ödeme almak. Rakamlar ve gerçek deneyimler.</div>
+        <a href="https://onurcan5.wordpress.com" target="_blank" class="blog-link">Devamını Oku →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ İLETİŞİM ═══════════════════════════════ -->
+<section id="iletisim">
+  <div class="container">
+    <div class="contact-box fade-in">
+      <div class="contact-title">Birlikte çalışalım</div>
+      <div class="contact-sub">
+        Web projesi, AI entegrasyonu veya dijital danışmanlık için ulaşın.<br>
+        Genellikle 24 saat içinde yanıt veriyorum.
+      </div>
+      <div class="contact-links">
+        <a href="https://github.com/onurcando" target="_blank" class="contact-link">
+          <span class="contact-icon">💻</span>
+          <div class="contact-info">
+            <div class="label">GitHub</div>
+            <div class="value">github.com/onurcando</div>
+          </div>
+        </a>
+        <a href="https://bionluk.com" target="_blank" class="contact-link">
+          <span class="contact-icon">🎯</span>
+          <div class="contact-info">
+            <div class="label">Freelance (Bionluk)</div>
+            <div class="value">Hizmet ilanlarım için tıklayın</div>
+          </div>
+        </a>
+      </div>
+      <div class="contact-note">
+        💡 <strong>Proje teklifi için:</strong> Ne yapmak istediğinizi, hangi teknolojileri kullandığınızı ve bütçenizi yazın. 24 saat içinde yanıt veriyorum.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Onur<span class="accent">CAN</span></div>
+    <div class="footer-links">
+      <a href="#projeler">Projeler</a>
+      <a href="#urunler">Ürünler</a>
+      <a href="#hizmetler">Hizmetler</a>
+      <a href="#blog">Blog</a>
+      <a href="https://github.com/onurcando" target="_blank">GitHub</a>
+    </div>
+    <div class="footer-copy">© 2024 Onur CAN · Türkiye için yapıldı 🇹🇷</div>
+  </div>
+</footer>
+
+<script>
+// ── Intersection Observer (fade-in) ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── Mobile nav ──
+const mobileNav = document.getElementById('mobile-nav');
+document.getElementById('nav-menu-btn').addEventListener('click', () => mobileNav.classList.add('open'));
+document.getElementById('mobile-close').addEventListener('click', () => mobileNav.classList.remove('open'));
+function closeMobileNav() { mobileNav.classList.remove('open'); }
+
+// ── Active nav link on scroll ──
+const sections = document.querySelectorAll('section[id], div[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const scrollSpy = () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+  });
+};
+window.addEventListener('scroll', scrollSpy, { passive: true });
+</script>
+</body>
+</html>
