@@ -14,13 +14,13 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://onurcando.github.io/">
 <meta property="og:title" content="Onur CAN — Yapay Zeka & Web Geliştirici">
-<meta property="og:description" content="3 web projesi, 6 dijital ürün, 0 TL maliyet. Türkiye için AI destekli çözümler.">
+<meta property="og:description" content="4 web projesi, 6 dijital ürün, 0 TL maliyet. Türkiye için AI destekli çözümler.">
 <meta property="og:locale" content="tr_TR">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Onur CAN — Yapay Zeka & Web Geliştirici">
-<meta name="twitter:description" content="3 web projesi, 6 dijital ürün, 0 TL maliyet. Türkiye için AI destekli çözümler.">
+<meta name="twitter:description" content="4 web projesi, 6 dijital ürün, 0 TL maliyet. Türkiye için AI destekli çözümler.">
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -341,6 +341,10 @@ section { padding: 100px 24px; }
   transition: gap 0.2s;
 }
 .project-link:hover { gap: 10px; }
+.project-links { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.project-link.alt { color: var(--muted); }
+.project-link.alt:hover { color: var(--text); }
+.p-tag.hot { background: rgba(245,158,11,0.15); color: var(--gold); }
 
 /* ── Services ── */
 #hizmetler { background: var(--bg); }
@@ -612,14 +616,14 @@ footer {
   <p class="hero-sub">Web Geliştirici · Yapay Zeka Uzmanı · Dijital Ürün Üreticisi</p>
   <p class="hero-hook">
     Çoğu yazılımcı "AI geliyor" diyor. Ben <strong>zaten kullanıyorum</strong> —<br>
-    3 canlı web projesi, 6 dijital ürün, hepsi <strong>sıfır maliyet</strong> ile hayata geçirildi.
+    4 canlı web projesi, 6 dijital ürün, hepsi <strong>sıfır maliyet</strong> ile hayata geçirildi.
   </p>
   <div class="hero-actions">
     <a href="#projeler" class="btn-primary">Projelerimi Gör →</a>
     <a href="#iletisim" class="btn-secondary">💬 Birlikte Çalışalım</a>
   </div>
   <div class="hero-stats">
-    <div class="stat-item"><div class="num">3</div><div class="lbl">Canlı Web Projesi</div></div>
+    <div class="stat-item"><div class="num">4</div><div class="lbl">Canlı Web Projesi</div></div>
     <div class="stat-item"><div class="num">6</div><div class="lbl">Dijital Ürün</div></div>
     <div class="stat-item"><div class="num">0₺</div><div class="lbl">Başlangıç Maliyeti</div></div>
     <div class="stat-item"><div class="num">2</div><div class="lbl">Tarayıcı Oyunu</div></div>
@@ -680,7 +684,7 @@ footer {
             <div class="tl-dot"></div>
             <div>
               <div class="tl-year">2024 — Şimdi</div>
-              <div class="tl-text">SınavAI, AIBul, EnflasyonKalkan — 3 canlı proje, 6 dijital ürün, 2 browser oyunu.</div>
+              <div class="tl-text">Muhasebe Asistanı, SınavAI, AIBul, EnflasyonKalkan — 4 canlı proje, 6 dijital ürün, 2 browser oyunu.</div>
             </div>
           </div>
           <div class="tl-item">
@@ -717,6 +721,22 @@ footer {
     <h2 class="section-title">Canlı projeler,<br>gerçek kullanıcılar</h2>
     <p class="section-sub">Her proje Türkiye'deki gerçek bir problemi çözüyor. Tamamen ücretsiz araçlarla geliştirildi, Vercel üzerinde yayında.</p>
     <div class="projects-grid">
+      <div class="project-card fade-in">
+        <div class="project-icon">🧾</div>
+        <div class="project-name">Muhasebe Asistanı</div>
+        <div class="project-desc">Mali müşavirler ve esnaf için cep muhasebecisi: beyanname takvimi (KDV, Muhtasar, Geçici Vergi…), mükellef takibi, görev hatırlatıcıları ve KDV / stopaj / gecikme zammı hesaplayıcıları. Kurulum gerektirmez, çevrimdışı çalışır, telefona uygulama gibi eklenir — hem iPhone hem Android.</div>
+        <div class="project-tags">
+          <span class="p-tag hot">🆕 Yeni</span>
+          <span class="p-tag">Muhasebe</span>
+          <span class="p-tag">PWA</span>
+          <span class="p-tag">Çevrimdışı</span>
+          <span class="p-tag">iOS + Android</span>
+        </div>
+        <div class="project-links">
+          <a href="https://muhasebe-web.vercel.app" target="_blank" rel="noopener" class="project-link">Uygulamayı Aç →</a>
+          <a href="https://github.com/onurcando/muhasebe-asistani/releases/latest" target="_blank" rel="noopener" class="project-link alt">Android APK ↓</a>
+        </div>
+      </div>
       <div class="project-card fade-in">
         <div class="project-icon">🎓</div>
         <div class="project-name">SınavAI</div>
