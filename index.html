@@ -734,6 +734,7 @@ footer {
         </div>
         <div class="project-links">
           <a href="https://muhasebe-web.vercel.app" target="_blank" rel="noopener" class="project-link">Uygulamayı Aç →</a>
+          <a href="https://muhasebe-web.vercel.app/tanitim" target="_blank" rel="noopener" class="project-link alt" onclick="openReel(event)">▶ Tanıtımı İzle</a>
           <a href="https://github.com/onurcando/muhasebe-asistani/releases/latest" target="_blank" rel="noopener" class="project-link alt">Android APK ↓</a>
         </div>
       </div>
@@ -1018,6 +1019,42 @@ const scrollSpy = () => {
   });
 };
 window.addEventListener('scroll', scrollSpy, { passive: true });
+</script>
+<!-- ═══════════════════════════════ TANITIM VİDEOSU (lightbox) ═══════════════════════════════ -->
+<div id="reel-modal" role="dialog" aria-modal="true" aria-label="Muhasebe Asistanı tanıtım videosu">
+  <button id="reel-close" aria-label="Kapat" onclick="closeReel()">✕</button>
+  <div id="reel-box">
+    <video id="reel-video" poster="https://muhasebe-web.vercel.app/muhasebe-reels-kapak.jpg"
+           controls playsinline preload="none"></video>
+    <a class="reel-cta" href="https://muhasebe-web.vercel.app" target="_blank" rel="noopener">📲 Uygulamayı Aç →</a>
+  </div>
+</div>
+<style>
+#reel-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;
+  flex-direction:column;gap:16px;background:rgba(3,12,9,.88);backdrop-filter:blur(6px);padding:24px}
+#reel-modal.acik{display:flex}
+#reel-box{display:flex;flex-direction:column;align-items:center;gap:14px}
+#reel-video{width:auto;height:min(80vh,720px);max-width:92vw;aspect-ratio:9/19.5;
+  border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.6);background:#000;border:1px solid rgba(255,255,255,.12)}
+#reel-close{position:absolute;top:18px;right:20px;width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:1.2rem;cursor:pointer}
+#reel-close:hover{background:rgba(255,255,255,.18)}
+.reel-cta{background:#fff;color:#063b2a;font-weight:700;text-decoration:none;padding:13px 24px;border-radius:12px}
+</style>
+<script>
+function openReel(e){
+  if(e) e.preventDefault();
+  var m=document.getElementById('reel-modal'), v=document.getElementById('reel-video');
+  if(!v.src) v.src='https://muhasebe-web.vercel.app/muhasebe-reels.mp4';
+  m.classList.add('acik'); document.body.style.overflow='hidden';
+  v.currentTime=0; v.play().catch(function(){});
+}
+function closeReel(){
+  var m=document.getElementById('reel-modal'), v=document.getElementById('reel-video');
+  m.classList.remove('acik'); document.body.style.overflow=''; v.pause();
+}
+document.getElementById('reel-modal').addEventListener('click',function(e){ if(e.target===this) closeReel(); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeReel(); });
 </script>
 </body>
 </html>
